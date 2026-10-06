@@ -1,0 +1,62 @@
+[
+  {
+    "source_id": "sample-lab",
+    "source_name": "Sample Lab Blog",
+    "title": "Sample Lab releases SampleForge 2",
+    "url": "https://example.com/blog/sampleforge-2",
+    "published_at": "now",
+    "authors": ["A. Example"],
+    "excerpt": "Sample Lab introduced SampleForge 2, a 7B open-weight language model. It runs locally with Ollama and PyTorch. The model scores 70 on the sample benchmark, up from 61 for SampleForge 1. Developers can use it for document summarization and code completion.",
+    "metadata": {"priority": 100}
+  },
+  {
+    "source_id": "sample-lab",
+    "source_name": "Sample Lab Blog",
+    "title": "Sample Lab releases SampleForge 2",
+    "url": "https://example.com/blog/sampleforge-2?utm_source=newsletter",
+    "published_at": "now",
+    "authors": ["A. Example"],
+    "excerpt": "Sample Lab introduced SampleForge 2, a 7B open-weight language model. It runs locally with Ollama and PyTorch. The model scores 70 on the sample benchmark, up from 61 for SampleForge 1. Developers can use it for document summarization and code completion.",
+    "metadata": {"priority": 100}
+  },
+  {
+    "source_id": "sample-lab",
+    "source_name": "Sample Lab Blog",
+    "title": "Sample Lab is hiring research engineers",
+    "url": "https://example.com/blog/hiring",
+    "published_at": "now",
+    "authors": [],
+    "excerpt": "Sample Lab is hiring research engineers to join our team in three offices. Apply by Friday.",
+    "metadata": {"priority": 100}
+  },
+  {
+    "source_id": "huggingface-papers",
+    "source_name": "Hugging Face Daily Papers",
+    "title": "Routing Agents with Small Verifiers",
+    "url": "https://huggingface.co/papers/sample-router",
+    "published_at": "now",
+    "authors": ["B. Example", "C. Example"],
+    "excerpt": "We present a framework that routes tool-calling agents through a small verifier model. On the public sample suite the router cuts failed calls by 18 percent. The implementation uses PyTorch.",
+    "metadata": {"priority": 75, "upvotes": 28}
+  },
+  {
+    "source_id": "github-releases",
+    "source_name": "GitHub Releases (vllm-project/vllm)",
+    "title": "vllm 0.9.0",
+    "url": "https://github.com/vllm-project/vllm/releases/tag/v0.9.0",
+    "published_at": "now",
+    "authors": ["vllm-project"],
+    "excerpt": "vLLM 0.9.0 adds disaggregated prefill for mixture-of-experts serving. The release notes state a 1.4x throughput gain on the included serving benchmark. It works with Hugging Face model checkpoints.",
+    "metadata": {"priority": 70, "stars": 42000, "release": "v0.9.0"}
+  },
+  {
+    "source_id": "hackernews",
+    "source_name": "Hacker News",
+    "title": "My thoughts on AGI timelines",
+    "url": "https://news.ycombinator.com/item?id=1",
+    "published_at": "now",
+    "authors": ["someuser"],
+    "excerpt": "My thoughts on AGI timelines and why the discourse keeps repeating itself without a new system.",
+    "metadata": {"priority": 40, "points": 120, "require_ai_terms": true}
+  }
+]

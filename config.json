@@ -1,0 +1,265 @@
+{
+  "lookback_hours": 36,
+  "max_items_to_analyze": 12,
+  "max_report_items": 8,
+  "http_timeout_seconds": 12,
+  "user_agent": "AI-Tech-Radar/0.1 (local research agent)",
+  "data_dir": "data",
+  "reports_dir": "reports",
+  "schedule_time": "08:00",
+  "schedule_timezone": "Asia/Kolkata",
+  "ollama": {
+    "enabled": true,
+    "host": "http://127.0.0.1:11434",
+    "model": "llama3.2",
+    "timeout_seconds": 90,
+    "fallback_extractive": true
+  },
+  "email": {
+    "enabled": true,
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "saisoumya.dolly@gmail.com",
+    "smtp_from": "saisoumya.dolly@gmail.com",
+    "to": "saisoumya.dolly@gmail.com",
+    "use_tls": true
+  },
+  "github": {
+    "api_base": "https://api.github.com",
+    "token_env": "GITHUB_TOKEN",
+    "min_stars": 50,
+    "search_query": "llm OR \"large language model\" OR \"ai agent\" OR \"diffusion model\" OR \"machine learning\"",
+    "search_per_page": 10,
+    "watch_releases": [
+      "ollama/ollama",
+      "vllm-project/vllm",
+      "huggingface/transformers",
+      "langchain-ai/langchain",
+      "ggml-org/llama.cpp",
+      "open-webui/open-webui",
+      "pytorch/pytorch",
+      "run-llama/llama_index",
+      "huggingface/diffusers",
+      "huggingface/text-generation-inference",
+      "sgl-project/sglang",
+      "unslothai/unsloth",
+      "berriai/litellm",
+      "microsoft/autogen",
+      "stanfordnlp/dspy",
+      "comfyanonymous/ComfyUI",
+      "ml-explore/mlx",
+      "NVIDIA/TensorRT-LLM",
+      "chroma-core/chroma",
+      "qdrant/qdrant",
+      "crewAIInc/crewAI",
+      "langchain-ai/langgraph"
+    ]
+  },
+  "huggingface_papers": {
+    "enabled": true,
+    "url": "https://huggingface.co/api/daily_papers",
+    "limit": 15,
+    "min_upvotes": 10
+  },
+  "arxiv": {
+    "enabled": true,
+    "url": "https://export.arxiv.org/api/query",
+    "search_query": "cat:cs.CL OR cat:cs.AI OR cat:cs.LG",
+    "max_results": 15
+  },
+  "hackernews": {
+    "enabled": true,
+    "url": "https://hn.algolia.com/api/v1/search_by_date",
+    "query": "AI OR LLM OR \"open source\" OR \"machine learning\" OR model",
+    "min_points": 80,
+    "hits_per_page": 20
+  },
+  "rss_feeds": [
+    {
+      "id": "openai",
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/rss.xml",
+      "enabled": true,
+      "priority": 100,
+      "require_ai_terms": false
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic News",
+      "url": "https://raw.githubusercontent.com/alan-turing-institute/ai-rss-feeds/refs/heads/main/feeds/anthropic-news.xml",
+      "enabled": true,
+      "priority": 100,
+      "require_ai_terms": false
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "enabled": true,
+      "priority": 95,
+      "require_ai_terms": false
+    },
+    {
+      "id": "google-ai",
+      "name": "Google AI Blog",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/rss/",
+      "enabled": true,
+      "priority": 90,
+      "require_ai_terms": false
+    },
+    {
+      "id": "meta-ai",
+      "name": "AI at Meta",
+      "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml",
+      "enabled": true,
+      "priority": 90,
+      "require_ai_terms": false
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "url": "https://mistral.ai/news/rss",
+      "enabled": true,
+      "priority": 90,
+      "require_ai_terms": false
+    },
+    {
+      "id": "huggingface-blog",
+      "name": "Hugging Face Blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "enabled": true,
+      "priority": 80,
+      "require_ai_terms": false
+    },
+    {
+      "id": "bair",
+      "name": "BAIR Blog",
+      "url": "https://bair.berkeley.edu/blog/feed.xml",
+      "enabled": true,
+      "priority": 70,
+      "require_ai_terms": false
+    },
+    {
+      "id": "simon-willison",
+      "name": "Simon Willison",
+      "url": "https://simonwillison.net/atom/everything/",
+      "enabled": true,
+      "priority": 65,
+      "require_ai_terms": true
+    },
+    {
+      "id": "microsoft-research",
+      "name": "Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "enabled": true,
+      "priority": 60,
+      "require_ai_terms": true
+    },
+    {
+      "id": "aws-ml",
+      "name": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "enabled": true,
+      "priority": 55,
+      "require_ai_terms": true
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/feed/",
+      "enabled": true,
+      "priority": 75,
+      "require_ai_terms": true
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "url": "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_cohere.xml",
+      "enabled": true,
+      "priority": 80,
+      "require_ai_terms": false
+    },
+    {
+      "id": "allenai",
+      "name": "Allen Institute for AI",
+      "url": "https://raw.githubusercontent.com/alan-turing-institute/ai-rss-feeds/refs/heads/main/feeds/allenai-news.xml",
+      "enabled": true,
+      "priority": 75,
+      "require_ai_terms": false
+    },
+    {
+      "id": "claude-blog",
+      "name": "Claude Blog",
+      "url": "https://raw.githubusercontent.com/alan-turing-institute/ai-rss-feeds/refs/heads/main/feeds/claude-blog.xml",
+      "enabled": true,
+      "priority": 90,
+      "require_ai_terms": false
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain Changelog",
+      "url": "https://docs.langchain.com/oss/python/releases/changelog/rss.xml",
+      "enabled": true,
+      "priority": 70,
+      "require_ai_terms": false
+    },
+    {
+      "id": "google-research",
+      "name": "Google Research",
+      "url": "https://research.google/blog/rss/",
+      "enabled": true,
+      "priority": 70,
+      "require_ai_terms": true
+    },
+    {
+      "id": "xai-news",
+      "name": "xAI News",
+      "url": "",
+      "enabled": false,
+      "priority": 100,
+      "require_ai_terms": false
+    }
+  ],
+  "filters": {
+    "low_value_patterns": [
+      "(?i)\\bhiring\\b",
+      "(?i)\\bjob opening\\b",
+      "(?i)\\bwebinar\\b",
+      "(?i)\\bsponsored\\b",
+      "(?i)\\bjoin our team\\b",
+      "(?i)\\bmy thoughts\\b",
+      "(?i)\\bcareers\\b",
+      "(?i)\\bhow to\\b",
+      "(?i)\\btutorial\\b",
+      "(?i)\\bweekly (digest|roundup|recap)\\b",
+      "(?i)\\bnewsletter\\b",
+      "(?i)\\bpodcast\\b"
+    ],
+    "ai_terms": [
+      "ai",
+      "llm",
+      "gpt",
+      "model",
+      "transformer",
+      "diffusion",
+      "agent",
+      "machine learning",
+      "neural",
+      "inference",
+      "fine-tun",
+      "multimodal",
+      "pytorch",
+      "open-weight",
+      "open source",
+      "language model",
+      "generative"
+    ]
+  },
+  "max_per_source": {
+    "arxiv": 3,
+    "hackernews": 2,
+    "github-search": 2,
+    "github-releases": 6,
+    "default": 4
+  }
+}
