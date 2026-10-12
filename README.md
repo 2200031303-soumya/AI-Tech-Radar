@@ -15,7 +15,7 @@ Summaries are grounded in the retrieved text. When Ollama is running, a local mo
 - Potential real-world use cases stated by the source
 - Original source link
 
-The daily email subject is `What's new today`. It includes a model, framework, developer tool, research result, or major product update only when the source describes a real release. Tips, digests, hiring posts, and empty fields stay out of the email. The saved report still marks unsupported fields as `Not stated in source.` The agent does not fill them in from model memory.
+The daily email subject is `What's new today`. It is sent at 8:00am IST and includes every collected model, framework, developer tool, research result, and major product update. Tips, digests, and hiring posts stay out. If nothing new was collected, the email says `There are no updates today.` The saved report still marks unsupported fields as `Not stated in source.` The agent does not fill them in from model memory. Leave the computer on or asleep at 8:00am so it can wake and send. A full shutdown skips that day's send instead of sending later.
 
 ## Run a sample report
 
@@ -38,15 +38,13 @@ python -m ai_tech_radar run --offline --no-email --fresh
 2. Copy `.env.example` to `.env`.
 3. Put a Gmail app password in `SMTP_PASSWORD` inside `.env`. Create one at https://myaccount.google.com/apppasswords. The report is addressed to `saisoumya.dolly@gmail.com`.
 4. Optional: set `GITHUB_TOKEN` to raise GitHub API rate limits for star counts.
-5. Register the daily task and confirm mail settings:
+5. Confirm mail settings:
 
    ```powershell
-   python -m ai_tech_radar schedule --install
-   python -m ai_tech_radar test-ollama
    python -m ai_tech_radar test-email
    ```
 
-The scheduled task runs every day at 8:00am India Standard Time. This computer is set to that timezone, so the task clock is 08:00. If the computer is asleep or offline at 8:00am, the task runs when it is next available and the network is up. `schedule --serve` keeps a process running and waits for the same 8:00am IST time.
+The daily email is sent by GitHub Actions at 8:00am IST, from the workflow `.github/workflows/daily-radar.yml`. That run uses GitHub's computers, so the laptop can be shut down or switched off. The schedule is 02:30 UTC, which is 8:00am IST. GitHub may start the job a few minutes after 8:00. The laptop task is not the sender, because a shutdown laptop cannot run a program. Summaries in that cloud run are copied from the sources. A local Ollama model is not available there.
 
 ## Sources
 

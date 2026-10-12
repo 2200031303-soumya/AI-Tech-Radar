@@ -201,6 +201,8 @@ class EmailTests(unittest.TestCase):
         self.assertNotIn("Not stated in source.", text)
         self.assertNotIn("Summary method", text)
         self.assertNotIn("Run notes", text)
+        empty = render_email_text([], generated_at=NOW)
+        self.assertIn("There are no updates today.", empty)
 
 
 class GroundingTests(unittest.TestCase):
@@ -248,6 +250,18 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(next_run(after).strftime("%Y-%m-%d %H:%M %z"), "2026-10-06 08:00 +0530")
         utc = next_run(before).astimezone(timezone.utc)
         self.assertEqual(utc.strftime("%H:%M"), "02:30")
+
+    def test_cloud_run_can_skip_ollama(self):
+        previous = os.environ.get("OLLAMA_ENABLED")
+        os.environ["OLLAMA_ENABLED"] = "false"
+        try:
+            config = load_config(PROJECT_ROOT / "config.json")
+            self.assertFalse(config["ollama"]["enabled"])
+        finally:
+            if previous is None:
+                os.environ.pop("OLLAMA_ENABLED", None)
+            else:
+                os.environ["OLLAMA_ENABLED"] = previous
 
     def test_recipient_is_configured(self):
         config = json.loads((PROJECT_ROOT / "config.json").read_text(encoding="utf-8"))

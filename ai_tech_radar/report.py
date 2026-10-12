@@ -87,7 +87,7 @@ def render_markdown(
         "",
     ]
     if not entries:
-        lines.append("No new relevant developments were found in this collection window.")
+        lines.append("There are no updates today.")
         lines.append("")
     for index, entry in enumerate(entries, start=1):
         item = entry.item
@@ -115,7 +115,7 @@ def render_email_text(entries: list[ReportEntry], *, generated_at: datetime) -> 
     day = generated_at.astimezone(IST).strftime("%d %B %Y")
     lines = ["What's new today", day, ""]
     if not entries:
-        lines.append("No strong technology updates today.")
+        lines.append("There are no updates today.")
         lines.append("")
         return "\n".join(lines)
     for index, entry in enumerate(entries, start=1):
@@ -138,7 +138,7 @@ def render_email_html(entries: list[ReportEntry], *, generated_at: datetime) -> 
         f"<p style=\"margin:0 0 20px;color:#555;\">{html.escape(day)}</p>",
     ]
     if not entries:
-        blocks.append("<p>No strong technology updates today.</p>")
+        blocks.append("<p>There are no updates today.</p>")
     for index, entry in enumerate(entries, start=1):
         title = f"{index}. {_area_label(entry)}: {entry.item.title}"
         blocks.append(f"<h2 style=\"font-size:18px;margin:28px 0 8px;\">{html.escape(title)}</h2>")
@@ -174,7 +174,7 @@ def render_html(
         f"<p style=\"line-height:1.5;\">{html.escape(_mode_note(stats, offline=offline, model=model))}</p>",
     ]
     if not entries:
-        blocks.append("<p>No new relevant developments were found in this collection window.</p>")
+        blocks.append("<p>There are no updates today.</p>")
     for index, entry in enumerate(entries, start=1):
         item = entry.item
         analysis = entry.analysis

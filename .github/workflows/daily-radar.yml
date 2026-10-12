@@ -1,0 +1,36 @@
+name: Daily AI Tech Radar
+
+on:
+  schedule:
+    # 08:00 India Standard Time is 02:30 UTC. India does not use daylight saving.
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the project
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Send the daily report
+        env:
+          SMTP_HOST: smtp.gmail.com
+          SMTP_PORT: "587"
+          SMTP_USER: saisoumya.dolly@gmail.com
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: saisoumya.dolly@gmail.com
+          EMAIL_TO: saisoumya.dolly@gmail.com
+          SMTP_TLS: "true"
+          OLLAMA_ENABLED: "false"
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m ai_tech_radar run

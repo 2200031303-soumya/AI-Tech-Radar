@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import socket
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -49,7 +51,36 @@ def run_pipeline(
         store.close()
 
 
+def _network_ready(host: str) -> bool:
+    try:
+        socket.getaddrinfo(host, 443)
+        return True
+    except OSError:
+        return False
+
+
+def _wait_for_network(config: dict) -> bool:
+    host = str(config.get("email", {}).get("smtp_host") or "smtp.gmail.com")
+    timeout = float(config.get("network_wait_seconds", 180))
+    deadline = time.monotonic() + timeout
+    while True:
+        if _network_ready(host):
+            return True
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(10)
+
+
 def _run(config, store: Store, stats: RunStats, clock: datetime, *, offline: bool, send_email: bool) -> RunResult:
+    if not offline and not _wait_for_network(config):
+        stats.errors.append("network: the connection was not ready")
+        return RunResult(
+            False,
+            None,
+            None,
+            "The network was not ready at the scheduled time. No email was sent, and the task will retry.",
+            stats,
+        )
     collected = collect_all(config, offline=offline, now=clock)
     items = []
     for result in collected:
@@ -79,14 +110,11 @@ def _run(config, store: Store, stats: RunStats, clock: datetime, *, offline: boo
         stats.analyzed += 1
         analysis = analyzer.analyze(item, offline=offline)
         stats.analysis_methods.append(analysis.method)
-        status = "reported" if analysis.relevant else "irrelevant"
-        decided.append((item, status))
-        if not analysis.relevant:
-            stats.dropped_irrelevant += 1
-            continue
-        if len(entries) >= report_limit:
+        if report_limit > 0 and len(entries) >= report_limit:
+            decided.append((item, "analyzed"))
             continue
         entries.append(ReportEntry(item=item, analysis=analysis))
+        decided.append((item, "reported"))
     if analyzer.ollama_error:
         stats.errors.append(f"ollama: {analyzer.ollama_error}")
     stats.reported = len(entries)
@@ -99,6 +127,15 @@ def _run(config, store: Store, stats: RunStats, clock: datetime, *, offline: boo
     if offline:
         stamp = f"{stamp}-offline"
     markdown_path, html_path = write_report(project_path(config, "reports_dir"), stamp, markdown, email_html)
+
+    if stats.fetched == 0 and stats.errors:
+        return RunResult(
+            False,
+            markdown_path,
+            html_path,
+            f"Report saved to {markdown_path}. The sources could not be reached, so a no-updates email was not sent.",
+            stats,
+        )
 
     email_message = "Email was not requested."
     if send_email:

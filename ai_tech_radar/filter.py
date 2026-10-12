@@ -176,7 +176,7 @@ def prepare_items(
             continue
         cap = int(per_source_cap.get(item.source_id, per_source_cap.get("default", 6)))
         count = per_source_count.get(item.source_id, 0)
-        if count >= cap:
+        if cap > 0 and count >= cap:
             trimmed += 1
             continue
         seen_urls.add(url_key)
@@ -194,6 +194,8 @@ def prepare_items(
 
     kept.sort(key=lambda item: (int(item.metadata.get("priority", 50)), engagement(item)), reverse=True)
     limit = int(config.get("max_items_to_analyze", 12))
+    if limit <= 0:
+        limit = len(kept)
     balanced = select_balanced(kept, limit)
     trimmed += max(len(kept) - len(balanced), 0)
     return FilterOutcome(balanced, duplicates, low_value, outside, trimmed)

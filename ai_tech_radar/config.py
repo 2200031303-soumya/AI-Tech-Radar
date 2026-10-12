@@ -53,6 +53,8 @@ def _apply_env(config: dict) -> None:
         ollama["host"] = os.environ["OLLAMA_HOST"]
     if os.getenv("OLLAMA_MODEL"):
         ollama["model"] = os.environ["OLLAMA_MODEL"]
+    if os.getenv("OLLAMA_ENABLED"):
+        ollama["enabled"] = os.environ["OLLAMA_ENABLED"].strip().lower() in {"1", "true", "yes", "on"}
 
     email = config.setdefault("email", {})
     mapping = {

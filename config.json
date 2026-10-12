@@ -1,7 +1,8 @@
 {
   "lookback_hours": 36,
-  "max_items_to_analyze": 12,
-  "max_report_items": 8,
+  "max_items_to_analyze": 0,
+  "max_report_items": 0,
+  "network_wait_seconds": 180,
   "http_timeout_seconds": 12,
   "user_agent": "AI-Tech-Radar/0.1 (local research agent)",
   "data_dir": "data",
@@ -256,10 +257,10 @@
     ]
   },
   "max_per_source": {
-    "arxiv": 3,
-    "hackernews": 2,
-    "github-search": 2,
-    "github-releases": 6,
-    "default": 4
+    "arxiv": 0,
+    "hackernews": 0,
+    "github-search": 0,
+    "github-releases": 0,
+    "default": 0
   }
 }
